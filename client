@@ -1,0 +1,46 @@
+package main
+
+import (
+	"os"
+	"time"
+	"github.com/Sirupsen/logrus"
+	"github.com/dustin/go-humanize"
+	"github.com/urfave/cli"
+	"k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/fields"
+	"k8s.io/client-go/kubernetes"
+	api "k8s.io/client-go/pkg/api/v1"
+	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/cache"
+	"k8s.io/client-go/tools/clientcmd"
+)
+
+var clientset *kubernetes.Clientset
+
+var controller cache.Controller
+var store cache.Store
+var imageCapacity map[string]int64
+
+func main() {
+	var err error
+	clientset, err = getClient()
+	if err != nil {
+		logrus.Error(err)
+		return err
+	}
+	go pollNodes()
+}
+
+
+func getClient() (*kubernetes.Clientset, error) {
+	var config *rest.Config
+	var err error
+	logrus.Info("Using in cluster config")
+	config, err = rest.InClusterConfig()
+	// in cluster access
+	
+	if err != nil {
+		return nil, err
+	}
+	return kubernetes.NewForConfig(config)
+}
