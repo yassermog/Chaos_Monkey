@@ -47,7 +47,7 @@ func main() {
 	os.Setenv("chaos_interval", interval)
 
 	// loop killer
-	loopkiller()
+	go loopkiller()
 
 	log.Println("Web Server is Starting on 7070 Port ....")
 	log.Fatal(http.ListenAndServe(":7070", nil))
@@ -111,6 +111,8 @@ func config_handeler(w http.ResponseWriter, r *http.Request) {
 		interval = "10"
 	}
 	os.Setenv("chaos_interval", interval)
+	fmt.Fprintf(w, "namespace = %s\n", namespace)
+	fmt.Fprintf(w, "interval = %s\n", interval)
 	
 	log.Printf("namespace = %s\n", namespace)
 	log.Printf("interval = %s\n", interval)	
@@ -210,4 +212,5 @@ func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Home Page ! \n")
 	fmt.Fprintf(w, "Try /pods  : to see pods \n")
 	fmt.Fprintf(w, "Try /kill  : to kill a pod \n")
+	fmt.Fprintf(w, "Try /config  : to config the chaos Monkey \n")
 }
