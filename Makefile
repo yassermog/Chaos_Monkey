@@ -20,5 +20,3 @@ push:
 	
 deploy:
 	- kubectl apply -f Choas_deployment.yaml
-	- kubectl expose deployment yasser-chaos --type=LoadBalancer --port=7070
-
