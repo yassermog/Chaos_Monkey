@@ -1,0 +1,13 @@
+go mod init github.com/yassermog/Chaos_Monkey
+go run main.go
+
+# using docker 
+docker run -d -p 7070:7070 -e PORT=7070 --name=hello-world yassermog/yasser-chaos
+
+#using make 
+make clan build 
+
+make clan build 
+
+
+kubectl create deployment yasser-chaos --image=yassermog/yasser-chaos

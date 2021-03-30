@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yasser-chaos
+  labels:
+    app: yasser-chaos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yasser-chaos
+  template:
+    metadata:
+      labels:
+        app: yasser-chaos
+    spec:
+      containers:
+        - name: yasser-chaos
+          image: yassermog/yasser-chaos
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7070
