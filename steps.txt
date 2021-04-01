@@ -11,3 +11,10 @@ make clan build
 
 
 kubectl create deployment yasser-chaos --image=yassermog/yasser-chaos
+
+minikube service --url
+
+
+# kubectl apply -f service-admin-role.yaml
+
+kubectl create clusterrolebinding service-admin-pod --clusterrole=cluster-admin --serviceaccount=default:default
