@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yasser-chaos
+  name: chaos-monkey
   labels:
-    app: yasser-chaos
+    app: chaos-monkey
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: yasser-chaos
+      app: chaos-monkey
   template:
     metadata:
       labels:
-        app: yasser-chaos
+        app: chaos-monkey
     spec:
       containers:
-        - name: yasser-chaos
+        - name: chaos-monkey
           image: yassermog/yasser-chaos
           imagePullPolicy: Always
           ports:

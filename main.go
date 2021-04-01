@@ -201,11 +201,14 @@ func loopkiller(){
 					log.Printf("no Pods to kill .....\n")
 				}
 				// to avoid killing him self
-				myself := strings.Contains(random_pod, "yasser-chaos")
+				myself := strings.Contains(random_pod, "chaos-monkey")
 				if myself {
+					log.Printf("I will not kill myself ! ")
+					log.Printf("Deploy some test pods to kill !")
 					break
+				}else{
+					go excute_kill(namespace,random_pod)
 				}
-				go excute_kill(namespace,random_pod)	
 			}
 			log.Printf("Sleeping for %s seconds \n", interval)
 			time.Sleep(time.Duration(wait) * time.Second)
