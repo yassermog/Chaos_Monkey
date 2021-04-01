@@ -29,7 +29,7 @@ deploy:
 
 auth:
 	- kubectl apply -f service-admin-role.yaml
-	- kubectl create clusterrolebinding service-admin-pod --clusterrole=cluster-admin --serviceaccount=default:chaos-monkey
+	- kubectl create clusterrolebinding service-admin-pod-chaos --clusterrole=cluster-admin --serviceaccount=default:chaos-monkey
 
 proxy:
 	minikube service --url chaos-monkey

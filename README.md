@@ -7,7 +7,15 @@ Chaos_Monkey
 To deploy to kubernetes 
 
 
+
 Checkout the repository and run 
+
+to Authrize the service access the default namespace 
+```
+make auth
+```
+
+to install the helm chart  
 
 ```
 helm install chaos-monkey ./chaos-monkey/ --set service.type=NodePort
@@ -32,10 +40,6 @@ to deploy 4 replicas of nginx
 make deploytest
 ```
 
-to Authrize the pod access the default namespace 
-```
-make auth
-```
 
 
 ### Testing 
