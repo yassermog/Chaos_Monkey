@@ -1,11 +1,7 @@
 # Chaos_Monkey
 Chaos_Monkey
 
-## Build 
-```
-make build
 
-```
 ## Deployment
 
 To deploy to kubernetes 
@@ -25,11 +21,9 @@ make install
 to access the pod service you can run 
 
 ```
-export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services chaos-monkey)
+  export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services chaos-monkey)
   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
-  
-echo $
 ```
 
 to deploy 4 replicas of nginx 
@@ -106,4 +100,10 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
+```
+
+
+## Build 
+```
+make build
 ```
