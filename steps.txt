@@ -1,3 +1,11 @@
+## Deployment 
+
+helm install chaos-monkey ./chaos-monkey/ --set service.type=NodePort
+
+echo $
+
+## Development 
+
 go mod init github.com/yassermog/Chaos_Monkey
 go run main.go
 
