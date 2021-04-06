@@ -12,10 +12,24 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	"math/rand"
-  	"time"
+	"time"
 	"strconv"
 	"strings"
 	pretty "github.com/inancgumus/prettyslice"
+	"github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promauto"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+func incrementPrometheus() {
+	opsKilled.Inc()
+}
+
+var (
+        opsKilled = promauto.NewCounter(prometheus.CounterOpts{
+                Name: "myapp_killed_pods",
+                Help: "The total number of pods killed",
+        })
 )
 
 func main() {
@@ -26,6 +40,8 @@ func main() {
 	r.HandleFunc("/pods", pods).Methods("GET")
 	r.HandleFunc("/config", config_handeler).Methods("GET")
 	r.HandleFunc("/kill", kill_handeler).Methods("GET")
+	http.Handle("/metrics", promhttp.Handler())
+
 	http.Handle("/", r)
 
 	// Configure Logging
@@ -163,7 +179,9 @@ func excute_kill(namespace string,podname string){
 	err2 := client.CoreV1().Pods(namespace).Delete(context.Background(),podname, meta_v1.DeleteOptions{})
 	if err2 != nil {
 		log.Fatal(err2)
-	}
+	}else{
+		incrementPrometheus()
+	} 
 }
 
 func loopkiller(){

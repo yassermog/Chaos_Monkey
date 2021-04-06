@@ -79,6 +79,9 @@ webview of pod
 ![Alt text](img/podweb.PNG)
 
 
+prometheus metric
+![Alt text](img/counter.PNG)
+
 
 ## Extra for RBAC
 
@@ -120,3 +123,8 @@ to install prometheus in Kubernetese you can run
 ```
 make monitoring
 ```
+
+prometheus metric
+![Alt text](img/counter.PNG)
+
+
