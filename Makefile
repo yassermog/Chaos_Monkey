@@ -20,6 +20,8 @@ clean:
 	-kubectl delete deployment my-nginx
 	-kubectl delete clusterrolebinding service-admin-pod
 	-helm del chaos-monkey
+	-helm del prometheus
+	
 push:
 	-docker build -t $(TAG) -t $(TAG):$(VER) .
 	-docker push $(TAG):$(VER)
@@ -36,3 +38,8 @@ proxy:
 
 deploytest:
 	- kubectl apply -f nginx_deployment.yaml
+
+monitoring: 
+	-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	-helm repo update
+	-helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring-prometheus --create-namespace 

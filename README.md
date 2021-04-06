@@ -108,6 +108,15 @@ roleRef:
 
 
 ## Build 
+
 ```
 make build
+```
+
+## Monitoring with prometheus 
+
+to install prometheus in Kubernetese you can run  
+
+```
+make monitoring
 ```
