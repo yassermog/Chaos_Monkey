@@ -34,7 +34,9 @@ auth:
 	- kubectl create clusterrolebinding service-admin-pod-chaos --clusterrole=cluster-admin --serviceaccount=default:chaos-monkey
 
 proxy:
-	minikube service --url chaos-monkey
+	- kubectl port-forward service/prometheus-kube-prometheus-prometheus 9090
+	- kubectl port-forward deployment/prometheus-grafana 3000 
+	- minikube service --url chaos-monkey
 
 deploytest:
 	- kubectl apply -f nginx_deployment.yaml
@@ -42,4 +44,4 @@ deploytest:
 monitoring: 
 	-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 	-helm repo update
-	-helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring-prometheus --create-namespace 
+	-helm install prometheus prometheus-community/kube-prometheus-stack

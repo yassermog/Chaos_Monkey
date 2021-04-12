@@ -21,7 +21,7 @@ import (
     "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-func incrementPrometheus() {
+func incrementPrometheusCounter() {
 	opsKilled.Inc()
 }
 
@@ -180,7 +180,7 @@ func excute_kill(namespace string,podname string){
 	if err2 != nil {
 		log.Fatal(err2)
 	}else{
-		incrementPrometheus()
+		incrementPrometheusCounter()
 	} 
 }
 

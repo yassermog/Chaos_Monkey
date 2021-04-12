@@ -127,4 +127,10 @@ make monitoring
 prometheus metric
 ![Alt text](img/counter.PNG)
 
+prometheus graph
+![Alt text](img/prom.PNG)
+
+grafana graph
+![Alt text](img/grafana.PNG)
+
 

@@ -48,6 +48,7 @@ Selector labels
 {{- define "Chaos-Monkey.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "Chaos-Monkey.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ .Release.Name }}
 {{- end }}
 
 {{/*
